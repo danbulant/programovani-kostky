@@ -8,6 +8,8 @@ extends Node3D
 @onready var camera_target: Marker3D = $CameraPositionTarget
 @onready var ui: Ui = $Ui
 
+const physics_timeout := 2.5
+
 enum GameState {
 	START,
 	THROWING_START,
@@ -19,9 +21,17 @@ var state: GameState = GameState.START
 var camera_transition := 0.
 var camera_speed := 1.5
 var first_throw := true
+var physics_timer := Timer.new()
 
 func _ready() -> void:
 	ui.connect("roll_pressed", throw_dice)
+	add_child(physics_timer)
+	physics_timer.connect("timeout", physics_timer_timeout)
+
+func physics_timer_timeout() -> void:
+	dice1.sleeping = true
+	dice2.sleeping = true
+	pass
 
 func _physics_process(delta: float) -> void:
 	camera_transition += delta * camera_speed
@@ -41,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		camera_target.look_at(avg_position, Vector3.FORWARD)
 		camera_transition = 0.
 		first_throw = false
+		physics_timer.stop()
 
 	ui.set_current_throw_value([dice1.get_value(), dice2.get_value()])
 
@@ -50,3 +61,4 @@ func throw_dice() -> void:
 		dice2.random_throw()
 		state = GameState.THROWING_START
 		camera_transition = 0.
+		physics_timer.start(physics_timeout)
