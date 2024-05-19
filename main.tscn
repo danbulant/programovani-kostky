@@ -116,8 +116,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
 current = true
 near = 0.003
 
-[node name="CameraPositionDefault" type="Marker3D" parent="."]
+[node name="CameraPositionStarting" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
+
+[node name="CameraPositionPrethrow" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+
+[node name="CameraPositionTarget" type="Marker3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rm3d5")

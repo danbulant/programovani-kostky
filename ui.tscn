@@ -36,4 +36,15 @@ tooltip_text = "Click or press space to roll dice"
 shortcut = SubResource("Shortcut_0osx3")
 text = "Roll"
 
+[node name="current_throw_value" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -29.0
+offset_right = 51.0
+grow_vertical = 0
+text = "0, 0"
+
 [connection signal="pressed" from="roll button" to="." method="_on_roll_button_pressed"]
