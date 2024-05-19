@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxphc5t7er28i"]
+[gd_scene load_steps=14 format=3 uid="uid://bxphc5t7er28i"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_h1pkq"]
 [ext_resource type="ArrayMesh" uid="uid://6ygsl6phockr" path="res://dice.res" id="1_qesf4"]
 [ext_resource type="Script" path="res://dice.gd" id="2_jh75e"]
+[ext_resource type="PackedScene" uid="uid://c8jkqtbqtg7ub" path="res://ui.tscn" id="4_80via"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kmncl"]
 bounce = 0.06
@@ -42,7 +43,7 @@ glow_enabled = true
 script = ExtResource("1_h1pkq")
 
 [node name="dice1" type="RigidBody3D" parent="." node_paths=PackedStringArray("start_marker")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31759, 0.217006, 0.0105869)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57225, 0.217006, 0.0105869)
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_kmncl")
 continuous_cd = true
@@ -55,6 +56,22 @@ mesh = ExtResource("1_qesf4")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="dice1"]
+shape = SubResource("BoxShape3D_jujds")
+
+[node name="dice2" type="RigidBody3D" parent="." node_paths=PackedStringArray("start_marker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31759, 0.217006, 0.0105869)
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_kmncl")
+continuous_cd = true
+script = ExtResource("2_jh75e")
+start_marker = NodePath("../DiceThrowStart")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="dice2"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+mesh = ExtResource("1_qesf4")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dice2"]
 shape = SubResource("BoxShape3D_jujds")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
@@ -99,6 +116,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
 current = true
 near = 0.003
 
+[node name="CameraPositionDefault" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rm3d5")
 camera_attributes = SubResource("CameraAttributesPractical_i6kyw")
@@ -106,8 +126,9 @@ camera_attributes = SubResource("CameraAttributesPractical_i6kyw")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.751874, 0.659306, 0, -0.659306, 0.751874, 0, 1.52296, 0)
 shadow_enabled = true
+directional_shadow_max_distance = 10.0
 
 [node name="DiceThrowStart" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.408271, 0.326392, 0)
 
-[connection signal="sleeping_state_changed" from="dice1" to="." method="_on_dice_1_sleeping_state_changed"]
+[node name="Ui" parent="." instance=ExtResource("4_80via")]

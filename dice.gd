@@ -4,7 +4,9 @@ class_name Dice
 @export var start_marker: Marker3D
 
 func random_throw() -> void:
-	global_position = start_marker.global_transform.origin
+	var position_variation = .01
+	var position_jitter = Vector3(randf_range(-position_variation, position_variation), randf_range(-position_variation, position_variation), randf_range(-position_variation, position_variation))
+	global_position = start_marker.global_transform.origin + position_jitter
 	linear_velocity = Vector3(0, 0, 0)
 	angular_velocity = Vector3(0, 0, 0)
 	var lateral_variation = .04

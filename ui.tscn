@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8jkqtbqtg7ub"]
+
+[ext_resource type="Script" path="res://ui.gd" id="1_qipxr"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_6n7ot"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_0osx3"]
+events = [SubResource("InputEventKey_6n7ot")]
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qipxr")
+
+[node name="roll button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -41.0
+offset_right = 19.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+tooltip_text = "Click or press space to roll dice"
+shortcut = SubResource("Shortcut_0osx3")
+text = "Roll"
+
+[connection signal="pressed" from="roll button" to="." method="_on_roll_button_pressed"]
