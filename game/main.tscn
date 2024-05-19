@@ -1,0 +1,141 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxphc5t7er28i"]
+
+[ext_resource type="Script" path="res://game/main.gd" id="1_h1pkq"]
+[ext_resource type="ArrayMesh" uid="uid://6ygsl6phockr" path="res://game/dice.res" id="1_qesf4"]
+[ext_resource type="Script" path="res://game/dice.gd" id="2_jh75e"]
+[ext_resource type="PackedScene" uid="uid://c8jkqtbqtg7ub" path="res://game/ui.tscn" id="4_80via"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kmncl"]
+bounce = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jujds"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qwxpl"]
+size = Vector2(1, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xg2jp"]
+plane = Plane(0, 0.5, 0.005, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1dy0"]
+size = Vector3(1, 0.499512, 0.0229492)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxrab"]
+ground_bottom_color = Color(0.610915, 0.695046, 0.774521, 1)
+
+[sub_resource type="Sky" id="Sky_q42e0"]
+sky_material = SubResource("ProceduralSkyMaterial_nxrab")
+
+[sub_resource type="Environment" id="Environment_64y34"]
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_q42e0")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_k5qa7"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_h1pkq")
+
+[node name="dice1" type="RigidBody3D" parent="." node_paths=PackedStringArray("start_marker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57225, 0.217006, 0.0105869)
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_kmncl")
+continuous_cd = true
+script = ExtResource("2_jh75e")
+start_marker = NodePath("../DiceThrowStart")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="dice1"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+mesh = ExtResource("1_qesf4")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dice1"]
+shape = SubResource("BoxShape3D_jujds")
+
+[node name="dice2" type="RigidBody3D" parent="." node_paths=PackedStringArray("start_marker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31759, 0.217006, 0.0105869)
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_kmncl")
+continuous_cd = true
+script = ExtResource("2_jh75e")
+start_marker = NodePath("../DiceThrowStart")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="dice2"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+mesh = ExtResource("1_qesf4")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dice2"]
+shape = SubResource("BoxShape3D_jujds")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_qwxpl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_xg2jp")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.502418)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250244, -0.0148926)
+shape = SubResource("BoxShape3D_i1dy0")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.469744)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250244, -0.0148926)
+shape = SubResource("BoxShape3D_i1dy0")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.473637, 0, 0.00503573)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250244, -0.0148926)
+shape = SubResource("BoxShape3D_i1dy0")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.502919, 0, 0.000281781)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250244, -0.0148926)
+shape = SubResource("BoxShape3D_i1dy0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
+current = true
+near = 0.003
+
+[node name="CameraPositionStarting" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
+
+[node name="CameraPositionPrethrow" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+
+[node name="CameraPositionTarget" type="Marker3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.751874, 0.659306, 0, -0.659306, 0.751874, 0, 1.52296, 0)
+shadow_enabled = true
+shadow_bias = 0.01
+directional_shadow_max_distance = 10.0
+
+[node name="DiceThrowStart" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.408271, 0.326392, 0)
+
+[node name="Ui" parent="." instance=ExtResource("4_80via")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_64y34")
+camera_attributes = SubResource("CameraAttributesPractical_k5qa7")
