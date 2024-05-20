@@ -1,4 +1,5 @@
 extends Control
+class_name DiceUi
 
 @export var value := 1 :
 	set(_value):
@@ -30,20 +31,20 @@ func _ready() -> void:
 	stylebox.corner_radius_top_right = radius
 
 func _draw() -> void:
-	var dim = min(size.x, size.y)
+	var dim: float = min(size.x, size.y)
 
 	draw_style_box(stylebox, Rect2(Vector2(), size))
 
-	var point_size = dim / 10
-	var center = Vector2(dim / 2, dim / 2)
-	var topleft = Vector2(dim / 4, dim / 4)
-	var topright = topleft + Vector2(dim / 2, 0)
-	var bottomleft = topleft + Vector2(0, dim / 2)
-	var bottomright = topleft + Vector2(dim / 2, dim / 2)
-	var centerleft = topleft + Vector2(0, dim / 4)
-	var centerright = topleft + Vector2(dim / 2, dim / 4)
-	var centertop = topleft + Vector2(dim / 4, 0)
-	var centerbottom = topleft + Vector2(dim / 4, dim / 2)
+	var point_size := dim / 10
+	var center := Vector2(dim / 2, dim / 2)
+	var topleft := Vector2(dim / 4, dim / 4)
+	var topright := topleft + Vector2(dim / 2, 0)
+	var bottomleft := topleft + Vector2(0, dim / 2)
+	var bottomright := topleft + Vector2(dim / 2, dim / 2)
+	var centerleft := topleft + Vector2(0, dim / 4)
+	var centerright := topleft + Vector2(dim / 2, dim / 4)
+	var centertop := topleft + Vector2(dim / 4, 0)
+	var centerbottom := topleft + Vector2(dim / 4, dim / 2)
 
 	if value % 2 == 1:
 		draw_circle(center, point_size, color)

@@ -28,10 +28,12 @@ enum MasterState {
 
 var state: GameState = GameState.START
 var master_state: MasterState = MasterState.LOGO
+var current_player = 0
 var camera_transition := 0.
 var camera_speed := 1.5
 var first_throw := true
 var physics_timer := Timer.new()
+var target_score = 100
 
 func _ready() -> void:
 	ui.connect("roll_pressed", throw_dice)
@@ -40,6 +42,7 @@ func _ready() -> void:
 	menu_scene.connect("start_game", switch_to_player_select)
 	player_select.connect("start_game", switch_to_game)
 	player_select.connect("back_to_menu", switch_to_menu)
+	ui.connect("back_to_menu", switch_to_menu)
 	switch_to_menu()
 
 func master_state_sync() -> void:
@@ -50,6 +53,7 @@ func master_state_sync() -> void:
 	player_select.visible = MasterState.PLAYER_SELECT == master_state
 	if master_state != MasterState.GAME:
 		physics_timer_timeout()
+	ui.update_medal()
 
 func switch_to_player_select() -> void:
 	master_state = MasterState.PLAYER_SELECT
@@ -57,6 +61,18 @@ func switch_to_player_select() -> void:
 
 func switch_to_game() -> void:
 	master_state = MasterState.GAME
+	# for i in ui.players.size():
+	# 	ui.players[i].player_name = ""
+	for i in player_select.player_names.size():
+		var player_name: String = player_select.player_names[i]
+		# if not player_name: continue
+		ui.players[i].player_name = player_name
+		ui.players[i].score = 0
+		ui.players[i].show_medal = false
+	for i in player_select.player_names.size():
+		if player_select.player_names[i]:
+			current_player = i
+			break
 	master_state_sync()
 
 func switch_to_menu() -> void:
@@ -67,6 +83,26 @@ func physics_timer_timeout() -> void:
 	dice1.sleeping = true
 	dice2.sleeping = true
 	pass
+
+func next_player() -> void:
+	current_player = (current_player + 1) % ui.players.size()
+	if not ui.players[current_player].player_name:
+		var found = false
+		for i in player_select.player_names:
+			if i:
+				found = true
+				break
+		if not found:
+			print("Trying to run next_player with no players! Semi-crashing to main menu.")
+			switch_to_menu()
+			return
+		next_player()
+
+func check_score() -> void:
+	for i in ui.players:
+		if i.score >= target_score:
+			print("Player", i.player_name, "won with", i.score, "points!")
+			break
 
 func _physics_process(delta: float) -> void:
 	camera_transition += delta * camera_speed
@@ -87,6 +123,15 @@ func _physics_process(delta: float) -> void:
 		camera_transition = 0.
 		first_throw = false
 		physics_timer.stop()
+		var d1 = dice1.get_value()
+		var d2 = dice2.get_value()
+		if d1 != 1 and d2 != 1:
+			ui.players[current_player].score += d1 + d2
+		elif d1 == 1 and d2 == 1:
+			ui.players[current_player].score = 0
+		ui.update_medal()
+		check_score()
+		next_player()
 
 	ui.set_current_throw_value([dice1.get_value(), dice2.get_value()])
 
