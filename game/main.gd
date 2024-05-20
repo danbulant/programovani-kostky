@@ -34,7 +34,7 @@ var master_state: MasterState = MasterState.LOGO
 var current_player = 0
 var camera_speed := 1.3
 var physics_timer := Timer.new()
-var target_score = 20
+var target_score = 100
 
 var camera_tween: Tween
 
