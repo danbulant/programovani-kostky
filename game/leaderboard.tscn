@@ -1,0 +1,315 @@
+[gd_scene load_steps=9 format=3 uid="uid://7t3pm5ta5qpf"]
+
+[ext_resource type="Script" path="res://game/leaderboard.gd" id="1_2hdko"]
+[ext_resource type="Script" path="res://game/Player.gd" id="1_k6g0n"]
+[ext_resource type="Texture2D" uid="uid://c25g6oj4fnw0h" path="res://icons/singleplayer.png" id="2_cmyqt"]
+[ext_resource type="Texture2D" uid="uid://olq6rc614eq1" path="res://icons/medal2.png" id="3_uconj"]
+[ext_resource type="Script" path="res://game/dice-ui.gd" id="4_g87m1"]
+[ext_resource type="Texture2D" uid="uid://dgwgb7g0gca8m" path="res://icons/exit.png" id="5_6ttie"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_6n7ot"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_fydai"]
+events = [SubResource("InputEventKey_6n7ot")]
+
+[node name="Leaderboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2hdko")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -250.0
+offset_right = 92.5
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Player" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_k6g0n")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player"]
+self_modulate = Color(0.329412, 0.690196, 1, 1)
+layout_mode = 2
+texture = ExtResource("2_cmyqt")
+
+[node name="Medal" type="TextureRect" parent="VBoxContainer/Player/TextureRect"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 41.0
+offset_right = 101.0
+offset_bottom = 106.0
+texture = ExtResource("3_uconj")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Player"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Player/VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Player/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="dice1" type="Control" parent="VBoxContainer/Player/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice2" type="Control" parent="VBoxContainer/Player/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice3" type="Control" parent="VBoxContainer/Player/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="ScoreChange" type="Label" parent="VBoxContainer/Player/VBoxContainer"]
+layout_mode = 2
+text = "+10"
+
+[node name="Player2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_k6g0n")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player2"]
+self_modulate = Color(0.780392, 0.529412, 0.992157, 1)
+layout_mode = 2
+texture = ExtResource("2_cmyqt")
+
+[node name="Medal" type="TextureRect" parent="VBoxContainer/Player2/TextureRect"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 41.0
+offset_right = 101.0
+offset_bottom = 106.0
+texture = ExtResource("3_uconj")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Player2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Player2/VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Player2/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="dice1" type="Control" parent="VBoxContainer/Player2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice2" type="Control" parent="VBoxContainer/Player2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice3" type="Control" parent="VBoxContainer/Player2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="ScoreChange" type="Label" parent="VBoxContainer/Player2/VBoxContainer"]
+layout_mode = 2
+text = "+10"
+
+[node name="Player3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_k6g0n")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player3"]
+self_modulate = Color(1, 0.47451, 0.501961, 1)
+layout_mode = 2
+texture = ExtResource("2_cmyqt")
+
+[node name="Medal" type="TextureRect" parent="VBoxContainer/Player3/TextureRect"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 41.0
+offset_right = 101.0
+offset_bottom = 106.0
+texture = ExtResource("3_uconj")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Player3"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Player3/VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Player3/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="dice1" type="Control" parent="VBoxContainer/Player3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice2" type="Control" parent="VBoxContainer/Player3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice3" type="Control" parent="VBoxContainer/Player3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="ScoreChange" type="Label" parent="VBoxContainer/Player3/VBoxContainer"]
+layout_mode = 2
+text = "+10"
+
+[node name="Player4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_k6g0n")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player4"]
+self_modulate = Color(0.996078, 0.509804, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_cmyqt")
+
+[node name="Medal" type="TextureRect" parent="VBoxContainer/Player4/TextureRect"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 41.0
+offset_right = 101.0
+offset_bottom = 106.0
+texture = ExtResource("3_uconj")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Player4"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Player4/VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Player4/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="dice1" type="Control" parent="VBoxContainer/Player4/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice2" type="Control" parent="VBoxContainer/Player4/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice3" type="Control" parent="VBoxContainer/Player4/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="ScoreChange" type="Label" parent="VBoxContainer/Player4/VBoxContainer"]
+layout_mode = 2
+text = "+10"
+
+[node name="Player5" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_k6g0n")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Player5"]
+self_modulate = Color(0, 0.780392, 0.556863, 1)
+layout_mode = 2
+texture = ExtResource("2_cmyqt")
+
+[node name="Medal" type="TextureRect" parent="VBoxContainer/Player5/TextureRect"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 41.0
+offset_right = 101.0
+offset_bottom = 106.0
+texture = ExtResource("3_uconj")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Player5"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Player5/VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Player5/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="dice1" type="Control" parent="VBoxContainer/Player5/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice2" type="Control" parent="VBoxContainer/Player5/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="dice3" type="Control" parent="VBoxContainer/Player5/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_g87m1")
+
+[node name="ScoreChange" type="Label" parent="VBoxContainer/Player5/VBoxContainer"]
+layout_mode = 2
+text = "+10"
+
+[node name="ExitButton" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -79.0
+offset_top = 18.0
+offset_right = -16.0
+offset_bottom = 81.0
+grow_horizontal = 0
+texture = ExtResource("5_6ttie")
+expand_mode = 1
+
+[node name="newbtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -59.0
+offset_right = -17.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Click or press space to roll dice"
+shortcut = SubResource("Shortcut_fydai")
+text = "New game"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.0
+offset_top = 22.0
+offset_right = 143.0
+offset_bottom = 39.0
+grow_horizontal = 2
+text = "Player 1 won with 105 points!"
+
+[connection signal="gui_input" from="ExitButton" to="." method="_on_exit_button_gui_input"]
+[connection signal="pressed" from="newbtn" to="." method="_on_newbtn_pressed"]

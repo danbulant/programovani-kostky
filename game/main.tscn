@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxphc5t7er28i"]
+[gd_scene load_steps=17 format=3 uid="uid://bxphc5t7er28i"]
 
 [ext_resource type="Script" path="res://game/main.gd" id="1_h1pkq"]
 [ext_resource type="ArrayMesh" uid="uid://6ygsl6phockr" path="res://game/dice.res" id="1_qesf4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8jkqtbqtg7ub" path="res://game/ui.tscn" id="4_80via"]
 [ext_resource type="PackedScene" uid="uid://cmt0o37jd1gt6" path="res://menu/menu_bg.tscn" id="5_r5r22"]
 [ext_resource type="PackedScene" uid="uid://k2duc4ddir2m" path="res://player_select/player_select.tscn" id="6_xkr2b"]
+[ext_resource type="PackedScene" uid="uid://7t3pm5ta5qpf" path="res://game/leaderboard.tscn" id="7_ry0u7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kmncl"]
 bounce = 0.06
@@ -144,6 +145,9 @@ visible = false
 visible = false
 
 [node name="PlayerSelect" parent="." instance=ExtResource("6_xkr2b")]
+visible = false
+
+[node name="Leaderboard" parent="." instance=ExtResource("7_ry0u7")]
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

@@ -11,6 +11,7 @@ extends Node3D
 @onready var menu_scene = $MenuBg
 @onready var player_select = $PlayerSelect
 @onready var base = $CSGMesh3D
+@onready var leaderboard = $Leaderboard
 
 const physics_timeout := 2.5
 
@@ -24,7 +25,8 @@ enum GameState {
 enum MasterState {
 	LOGO,
 	PLAYER_SELECT,
-	GAME
+	GAME,
+	LEADERBOARD
 }
 
 var state: GameState = GameState.START
@@ -32,7 +34,7 @@ var master_state: MasterState = MasterState.LOGO
 var current_player = 0
 var camera_speed := 1.3
 var physics_timer := Timer.new()
-var target_score = 100
+var target_score = 20
 
 var camera_tween: Tween
 
@@ -48,6 +50,8 @@ func _ready() -> void:
 	menu_scene.connect("start_game", switch_to_player_select)
 	player_select.connect("start_game", switch_to_game)
 	player_select.connect("back_to_menu", switch_to_menu)
+	leaderboard.connect("back_to_menu", switch_to_menu)
+	leaderboard.connect("new_game_requested", switch_to_player_select)
 	ui.connect("back_to_menu", switch_to_menu)
 	switch_to_menu()
 	ui.update_pointer()
@@ -59,9 +63,19 @@ func master_state_sync() -> void:
 	menu_scene.ui_visible = MasterState.LOGO == master_state
 	player_select.visible = MasterState.PLAYER_SELECT == master_state
 	base.visible = MasterState.GAME == master_state
+	leaderboard.visible = MasterState.LEADERBOARD == master_state
 	if master_state != MasterState.GAME:
 		physics_timer_timeout()
+		rst_camera_tween()
+		camera.global_transform = camera_starting.global_transform
 	ui.update_medal()
+	leaderboard_sync()
+
+func leaderboard_sync() -> void:
+	for i in ui.players.size():
+		leaderboard.players[i].player_name = ui.players[i].player_name
+		leaderboard.players[i].score = ui.players[i].score
+	leaderboard.apply()
 
 func switch_to_player_select() -> void:
 	master_state = MasterState.PLAYER_SELECT
@@ -110,6 +124,8 @@ func next_player() -> void:
 func check_score() -> void:
 	for i in ui.players:
 		if i.score >= target_score:
+			master_state = MasterState.LEADERBOARD
+			master_state_sync()
 			print("Player", i.player_name, "won with", i.score, "points!")
 			break
 
