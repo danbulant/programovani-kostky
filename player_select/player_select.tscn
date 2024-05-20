@@ -1,0 +1,206 @@
+[gd_scene load_steps=8 format=3 uid="uid://k2duc4ddir2m"]
+
+[ext_resource type="Script" path="res://player_select/player_select.gd" id="1_qqyon"]
+[ext_resource type="Texture2D" uid="uid://c25g6oj4fnw0h" path="res://icons/singleplayer.png" id="1_ra1kc"]
+[ext_resource type="Texture2D" uid="uid://c0yrwtgac654j" path="res://icons/up.png" id="2_de6io"]
+[ext_resource type="Texture2D" uid="uid://dgwgb7g0gca8m" path="res://icons/exit.png" id="4_4xfaw"]
+
+[sub_resource type="Animation" id="Animation_mkwqy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectorContainer/SelectorTexture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_24wm5"]
+resource_name = "selector_float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectorContainer/SelectorTexture:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -11), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjb0h"]
+_data = {
+"RESET": SubResource("Animation_mkwqy"),
+"selector_float": SubResource("Animation_24wm5")
+}
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qqyon")
+
+[node name="Players" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Player1" type="VBoxContainer" parent="Players"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player1"]
+modulate = Color(0.327948, 0.688773, 1, 1)
+layout_mode = 2
+texture = ExtResource("1_ra1kc")
+
+[node name="LineEdit" type="LineEdit" parent="Players/Player1"]
+layout_mode = 2
+placeholder_text = "Player 1"
+
+[node name="Player2" type="VBoxContainer" parent="Players"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player2"]
+modulate = Color(0.779557, 0.531037, 0.993503, 1)
+layout_mode = 2
+texture = ExtResource("1_ra1kc")
+
+[node name="LineEdit" type="LineEdit" parent="Players/Player2"]
+layout_mode = 2
+placeholder_text = "Player 2"
+
+[node name="Player3" type="VBoxContainer" parent="Players"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player3"]
+modulate = Color(1, 0.474572, 0.502802, 1)
+layout_mode = 2
+texture = ExtResource("1_ra1kc")
+
+[node name="LineEdit" type="LineEdit" parent="Players/Player3"]
+layout_mode = 2
+placeholder_text = "Player 3"
+
+[node name="Player4" type="VBoxContainer" parent="Players"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player4"]
+modulate = Color(0.99713, 0.511467, 7.70092e-07, 1)
+layout_mode = 2
+texture = ExtResource("1_ra1kc")
+
+[node name="LineEdit" type="LineEdit" parent="Players/Player4"]
+layout_mode = 2
+placeholder_text = "Player 4"
+
+[node name="Player5" type="VBoxContainer" parent="Players"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player5"]
+modulate = Color(1.34766e-06, 0.780483, 0.557622, 1)
+layout_mode = 2
+texture = ExtResource("1_ra1kc")
+
+[node name="LineEdit" type="LineEdit" parent="Players/Player5"]
+layout_mode = 2
+placeholder_text = "Player 5"
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -66.0
+offset_right = 47.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+disabled = true
+text = "Start"
+
+[node name="SelectorContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -282.0
+offset_top = 80.0
+offset_right = -242.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectorTexture" type="TextureRect" parent="SelectorContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_de6io")
+expand_mode = 1
+
+[node name="StartDisabledInfo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -101.0
+offset_right = 140.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Name 2+ players to continue"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 83.0
+texture = ExtResource("4_4xfaw")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gjb0h")
+}
+autoplay = "selector_float"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]

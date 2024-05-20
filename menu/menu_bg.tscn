@@ -1,28 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmt0o37jd1gt6"]
+[gd_scene load_steps=6 format=3 uid="uid://cmt0o37jd1gt6"]
 
 [ext_resource type="ArrayMesh" uid="uid://6ygsl6phockr" path="res://game/dice.res" id="1_8u4bs"]
 [ext_resource type="Script" path="res://menu/menu_bg.gd" id="1_mvbgk"]
 [ext_resource type="PackedScene" uid="uid://dfarwiq8kvcxa" path="res://menu/menu_ui.tscn" id="2_5dpja"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_os646"]
-ground_bottom_color = Color(0.610915, 0.695046, 0.774521, 1)
-
-[sub_resource type="Sky" id="Sky_cj84e"]
-sky_material = SubResource("ProceduralSkyMaterial_os646")
-
-[sub_resource type="Environment" id="Environment_hqpr0"]
-background_mode = 2
-background_color = Color(1, 1, 1, 1)
-sky = SubResource("Sky_cj84e")
-ambient_light_source = 3
-reflected_light_source = 2
-tonemap_mode = 3
-ssao_enabled = true
-ssil_enabled = true
-sdfgi_enabled = true
-glow_enabled = true
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_cvruf"]
 
 [sub_resource type="Animation" id="Animation_fnyq0"]
 resource_name = "float"
@@ -51,14 +31,8 @@ _data = {
 [node name="MenuBg" type="Node3D"]
 script = ExtResource("1_mvbgk")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CameraPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323323, 0.972071)
-current = true
-near = 0.003
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_hqpr0")
-camera_attributes = SubResource("CameraAttributesPractical_cvruf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.902146, 0.161505, -0.400062, -0.132644, 0.986206, 0.0990162, 0.410534, -0.0362611, 0.911124, 0, 1.52296, 0)
@@ -73,12 +47,12 @@ libraries = {
 autoplay = "float"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.0374396, -0.00439883, 0.032847, -0.0194431, 0.0430478, -0.0163967, -0.0268373, -0.0250506, -0.0339444, 0.152866, 0.215249, 0.637892)
+transform = Transform3D(-0.0374396, -0.00439883, 0.032847, -0.0194431, 0.0430478, -0.0163967, -0.0268373, -0.0250506, -0.0339444, 0.152777, 0.229333, 0.63782)
 mesh = ExtResource("1_8u4bs")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0475114, -0.0035802, -0.0151608, 0.0155677, 0.0091615, 0.0466231, -0.000560477, -0.049023, 0.00982022, 0.28582, 0.375627, 0.637932)
+transform = Transform3D(0.0475114, -0.0035802, -0.0151608, 0.0155677, 0.0091615, 0.0466231, -0.000560477, -0.049023, 0.00982022, 0.28552, 0.392348, 0.63782)
 mesh = ExtResource("1_8u4bs")
 
 [node name="MenuUi" parent="." instance=ExtResource("2_5dpja")]

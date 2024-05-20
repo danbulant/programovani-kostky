@@ -7,6 +7,9 @@ extends Node3D
 @onready var camera_prethrow: Marker3D = $CameraPositionPrethrow
 @onready var camera_target: Marker3D = $CameraPositionTarget
 @onready var ui: Ui = $Ui
+@onready var gamescene_light = $GameSceneLight
+@onready var menu_scene = $MenuBg
+@onready var player_select = $PlayerSelect
 
 const physics_timeout := 2.5
 
@@ -17,7 +20,14 @@ enum GameState {
 	THROWN
 }
 
+enum MasterState {
+	LOGO,
+	PLAYER_SELECT,
+	GAME
+}
+
 var state: GameState = GameState.START
+var master_state: MasterState = MasterState.LOGO
 var camera_transition := 0.
 var camera_speed := 1.5
 var first_throw := true
@@ -27,6 +37,31 @@ func _ready() -> void:
 	ui.connect("roll_pressed", throw_dice)
 	add_child(physics_timer)
 	physics_timer.connect("timeout", physics_timer_timeout)
+	menu_scene.connect("start_game", switch_to_player_select)
+	player_select.connect("start_game", switch_to_game)
+	player_select.connect("back_to_menu", switch_to_menu)
+	switch_to_menu()
+
+func master_state_sync() -> void:
+	ui.visible = MasterState.GAME == master_state
+	gamescene_light.visible = MasterState.GAME == master_state
+	menu_scene.visible = MasterState.LOGO == master_state
+	menu_scene.ui_visible = MasterState.LOGO == master_state
+	player_select.visible = MasterState.PLAYER_SELECT == master_state
+	if master_state != MasterState.GAME:
+		physics_timer_timeout()
+
+func switch_to_player_select() -> void:
+	master_state = MasterState.PLAYER_SELECT
+	master_state_sync()
+
+func switch_to_game() -> void:
+	master_state = MasterState.GAME
+	master_state_sync()
+
+func switch_to_menu() -> void:
+	master_state = MasterState.LOGO
+	master_state_sync()
 
 func physics_timer_timeout() -> void:
 	dice1.sleeping = true
@@ -37,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	camera_transition += delta * camera_speed
 	camera_transition = min(camera_transition, 1.)
 	if state == GameState.THROWING_START or state == GameState.THROWING:
-		camera.transform = ( camera_starting if first_throw else camera_target).transform.interpolate_with(camera_prethrow.transform, camera_transition)
+		camera.transform = (camera_starting if first_throw else camera_target).transform.interpolate_with(camera_prethrow.transform, camera_transition)
 	elif state == GameState.THROWN:
 		camera.transform = camera_prethrow.transform.interpolate_with(camera_target.transform, camera_transition)
 
