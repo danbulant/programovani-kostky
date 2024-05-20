@@ -46,7 +46,7 @@ glow_enabled = true
 script = ExtResource("1_h1pkq")
 
 [node name="dice1" type="RigidBody3D" parent="." node_paths=PackedStringArray("start_marker")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57225, 0.217006, 0.0105869)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27056, 0.217006, 0.0105869)
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_kmncl")
 continuous_cd = true
@@ -62,7 +62,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_jujds")
 
 [node name="dice2" type="RigidBody3D" parent="." node_paths=PackedStringArray("start_marker")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31759, 0.217006, 0.0105869)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0159, 0.217006, 0.0105869)
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_kmncl")
 continuous_cd = true
@@ -128,7 +128,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 
 [node name="CameraPositionTarget" type="Marker3D" parent="."]
 
 [node name="DiceThrowStart" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.408271, 0.326392, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.347943, 0.326392, 0)
 
 [node name="GameSceneLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.751874, 0.659306, 0, -0.659306, 0.751874, 0, 1.52296, 0)
@@ -141,7 +141,6 @@ directional_shadow_max_distance = 10.0
 visible = false
 
 [node name="MenuBg" parent="." instance=ExtResource("5_r5r22")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2.66249)
 visible = false
 
 [node name="PlayerSelect" parent="." instance=ExtResource("6_xkr2b")]

@@ -17,11 +17,25 @@ func set_current_throw_value(value: Array[int]) -> void:
 @onready var player3 = $VBoxContainer/Player3
 @onready var player4 = $VBoxContainer/Player4
 @onready var player5 = $VBoxContainer/Player5
+@onready var container = $VBoxContainer
+@onready var pointer = $CurrentPlayerPointer
 
 var players: Array[Player] = []
+var current_player: int = 0 :
+	set(value):
+		current_player = value
+		update_pointer()
 
+var tween: Tween
 func _ready() -> void:
 	players = [player1, player2, player3, player4, player5]
+
+func update_pointer() -> void:
+	pointer.global_position.x = container.size.x
+	var p = players[current_player]
+	if tween: tween.kill()
+	tween = create_tween().set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(pointer, "global_position:y", p.global_position.y + p.size.y/2 - pointer.size.y/2, .6)
 
 func update_medal() -> void:
 	var max_score = 0

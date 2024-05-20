@@ -7,6 +7,7 @@ class_name Player
 @onready var dice1: DiceUi = $VBoxContainer/HBoxContainer/dice1
 @onready var dice2: DiceUi = $VBoxContainer/HBoxContainer/dice2
 @onready var dice3: DiceUi = $VBoxContainer/HBoxContainer/dice3
+@onready var score_change_label: Label = $VBoxContainer/ScoreChange
 
 @export var player_name: String :
 	set(value):
@@ -26,7 +27,13 @@ class_name Player
 		dice2.value = (score % 100) / 10
 		dice3.value = score % 10
 
+@export var score_change: String = "" :
+	set(value):
+		score_change = value
+		score_change_label.text = score_change
+
 func _ready():
 	player_name = player_name
 	show_medal = show_medal
 	score = score
+	score_change = score_change
